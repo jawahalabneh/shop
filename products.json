@@ -1,0 +1,396 @@
+[
+  {
+    "id": 1,
+    "categoryId": "mahashi",
+    "name": "مقدوس جواها لبنة",
+    "description": "مقدوس بلدي طازج محشو باللبنة الفاخرة، منقوع بزيت الزيتون البلدي 100%.",
+    "basePrice": 5.0,
+    "image": "images/mahashi/makdoos/kabeer.png",
+    "options": {
+      "sizes": [
+        {
+          "name": "كبير",
+          "priceAdd": 0,
+          "img": "images/mahashi/makdoos/kabeer.png"
+        },
+        {
+          "name": "صغير",
+          "priceAdd": -2.0,
+          "img": "images/mahashi/makdoos/sageer.png"
+        }
+      ],
+      "flavors": [
+        {
+          "name": "عادي",
+          "priceAdd": 0
+        },
+        {
+          "name": "سبايسي",
+          "priceAdd": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": 2,
+    "categoryId": "mahashi",
+    "name": "دوالي جواها لبنة",
+    "description": "ورق دوالي بلدي محشو باللبنة الفاخرة، وصفة بيتية أصيلة بزيت الزيتون.",
+    "basePrice": 5.0,
+    "image": "images/mahashi/dawali/kabeer.png",
+    "options": {
+      "sizes": [
+        {
+          "name": "كبير",
+          "priceAdd": 0,
+          "img": "images/mahashi/dawali/kabeer.png"
+        },
+        {
+          "name": "صغير",
+          "priceAdd": -2.0,
+          "img": "images/mahashi/dawali/sageer.png"
+        }
+      ],
+      "flavors": [
+        {
+          "name": "عادي",
+          "priceAdd": 0
+        },
+        {
+          "name": "سبايسي",
+          "priceAdd": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": 3,
+    "categoryId": "mahashi",
+    "name": "زيتون مشوي جواها لبنة",
+    "description": "زيتون أخضر مشوي على الفحم ومحشو باللبنة الفاخرة، نكهة مدخنة مميزة.",
+    "basePrice": 5.0,
+    "image": "images/mahashi/zaytoon_aadi/kabeer.png",
+    "options": {
+      "sizes": [
+        {
+          "name": "كبير",
+          "priceAdd": 0,
+          "img": "images/mahashi/zaytoon_aadi/kabeer.png"
+        },
+        {
+          "name": "صغير",
+          "priceAdd": -2.0,
+          "img": "images/mahashi/zaytoon_aadi/sageer.png"
+        }
+      ],
+      "flavors": [
+        {
+          "name": "عادي",
+          "priceAdd": 0
+        },
+        {
+          "name": "سبايسي",
+          "priceAdd": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": 4,
+    "categoryId": "mahashi",
+    "name": "زيتون اسود جواها لبنة",
+    "description": "زيتون أسود مشوي محشو باللبنة الفاخرة، طعم غني وقوام كريمي.",
+    "basePrice": 5.0,
+    "image": "images/mahashi/zaytoon_aswad/kabeer.png",
+    "options": {
+      "sizes": [
+        {
+          "name": "كبير",
+          "priceAdd": 0,
+          "img": "images/mahashi/zaytoon_aswad/kabeer.png"
+        },
+        {
+          "name": "صغير",
+          "priceAdd": -2.0,
+          "img": "images/mahashi/zaytoon_aswad/sageer.png"
+        }
+      ],
+      "flavors": [
+        {
+          "name": "عادي",
+          "priceAdd": 0
+        },
+        {
+          "name": "سبايسي",
+          "priceAdd": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": 5,
+    "categoryId": "mahashi",
+    "name": "ميكس زيتون جواها لبنة",
+    "description": "خلطة زيتون أخضر وأسود مشوي، محشوة باللبنة الفاخرة لتجمع بين نكهتين بطبق واحد.",
+    "basePrice": 5.0,
+    "image": "images/mahashi/zaytoon_mix/kabeer.png",
+    "options": {
+      "sizes": [
+        {
+          "name": "كبير",
+          "priceAdd": 0,
+          "img": "images/mahashi/zaytoon_mix/kabeer.png"
+        },
+        {
+          "name": "صغير",
+          "priceAdd": -2.0,
+          "img": "images/mahashi/zaytoon_mix/sageer.png"
+        }
+      ],
+      "flavors": [
+        {
+          "name": "عادي",
+          "priceAdd": 0
+        },
+        {
+          "name": "سبايسي",
+          "priceAdd": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": 7,
+    "categoryId": "mahashi",
+    "name": "مخلل خيار جواها لبنة",
+    "description": "خيار مخلل بلدي محشو باللبنة الفاخرة، طعم حامض منعش مع دسم اللبنة.",
+    "basePrice": 5.0,
+    "image": "images/mahashi/mekhalal_khyar/kabeer.png",
+    "options": {
+      "sizes": [
+        {
+          "name": "كبير",
+          "priceAdd": 0,
+          "img": "images/mahashi/mekhalal_khyar/kabeer.png"
+        },
+        {
+          "name": "صغير",
+          "priceAdd": -2.0,
+          "img": "images/mahashi/mekhalal_khyar/sageer.png"
+        }
+      ],
+      "flavors": [
+        {
+          "name": "عادي",
+          "priceAdd": 0
+        },
+        {
+          "name": "سبايسي",
+          "priceAdd": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": 8,
+    "categoryId": "mahashi",
+    "name": "فلفل جواها لبنة",
+    "description": "فلفل حلو محشو باللبنة الفاخرة، منقوع بزيت الزيتون على الطريقة البلدية.",
+    "basePrice": 5.0,
+    "image": "images/mahashi/felfel/kabeer.png",
+    "options": {
+      "sizes": [
+        {
+          "name": "كبير",
+          "priceAdd": 0,
+          "img": "images/mahashi/felfel/kabeer.png"
+        },
+        {
+          "name": "صغير",
+          "priceAdd": -2.0,
+          "img": "images/mahashi/felfel/sageer.png"
+        }
+      ],
+      "flavors": [
+        {
+          "name": "عادي",
+          "priceAdd": 0
+        },
+        {
+          "name": "سبايسي",
+          "priceAdd": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": 9,
+    "categoryId": "karat",
+    "name": "كرات اللبنة",
+    "description": "كرات لبنة بلدية طازجة، مغموسة بزيت الزيتون، مثالية للفطور والمقبلات.",
+    "basePrice": 5.0,
+    "image": "images/karat/allabaneh/kabeer.png",
+    "options": {
+      "sizes": [
+        {
+          "name": "كبير",
+          "priceAdd": 0,
+          "img": "images/karat/allabaneh/kabeer.png"
+        },
+        {
+          "name": "صغير",
+          "priceAdd": -2.0,
+          "img": "images/karat/allabaneh/sageer.png"
+        }
+      ],
+      "flavors": [
+        {
+          "name": "عادي",
+          "priceAdd": 0
+        },
+        {
+          "name": "سبايسي",
+          "priceAdd": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": 10,
+    "categoryId": "karat",
+    "name": "كرات اللبنة بالزعتر",
+    "description": "كرات لبنة بلدية مغطاة بالزعتر البلدي وزيت الزيتون، نكهة تراثية أصيلة.",
+    "basePrice": 5.0,
+    "image": "images/karat/bilzaatar/kabeer.png",
+    "options": {
+      "sizes": [
+        {
+          "name": "كبير",
+          "priceAdd": 0,
+          "img": "images/karat/bilzaatar/kabeer.png"
+        },
+        {
+          "name": "صغير",
+          "priceAdd": -2.0,
+          "img": "images/karat/bilzaatar/sageer.png"
+        }
+      ],
+      "flavors": [
+        {
+          "name": "عادي",
+          "priceAdd": 0
+        },
+        {
+          "name": "سبايسي",
+          "priceAdd": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": 11,
+    "categoryId": "karat",
+    "name": "كرات اللبنة بالجوز",
+    "description": "كرات لبنة بلدية مغطاة بالجوز المفروم الطازج، قوام مقرمش مع دسم اللبنة.",
+    "basePrice": 5.0,
+    "image": "images/karat/biljoz/kabeer.png",
+    "options": {
+      "sizes": [
+        {
+          "name": "كبير",
+          "priceAdd": 0,
+          "img": "images/karat/biljoz/kabeer.png"
+        },
+        {
+          "name": "صغير",
+          "priceAdd": -2.0,
+          "img": "images/karat/biljoz/sageer.png"
+        }
+      ],
+      "flavors": [
+        {
+          "name": "عادي",
+          "priceAdd": 0
+        },
+        {
+          "name": "سبايسي",
+          "priceAdd": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": 13,
+    "categoryId": "mooneh",
+    "name": "خل تفاح طبيعي",
+    "description": "خل تفاح طبيعي 100% مصنوع بطريقة تقليدية، بدون أي إضافات صناعية.",
+    "basePrice": 2.0,
+    "image": "images/mooneh/khall_tuffah/kabeer.png"
+  },
+  {
+    "id": 14,
+    "categoryId": "mooneh",
+    "name": "شطة",
+    "description": "شطة بلدية حارة مصنوعة يدوياً من أجود أنواع الفلفل الحار وزيت الزيتون.",
+    "basePrice": 3.0,
+    "image": "images/mooneh/shattah/kabeer.png",
+    "options": {
+      "sizes": [
+        {
+          "name": "كبير",
+          "priceAdd": 0,
+          "img": "images/mooneh/shattah/kabeer.png"
+        },
+        {
+          "name": "صغير",
+          "priceAdd": -1.0,
+          "img": "images/mooneh/shattah/sageer.png"
+        }
+      ]
+    }
+  },
+  {
+    "id": 15,
+    "categoryId": "mooneh",
+    "name": "زعتر بلدي",
+    "description": "زعتر بلدي أصلي مطحون طازج، ممزوج بالسماق وزيت الزيتون البلدي.",
+    "basePrice": 3.0,
+    "image": "images/mooneh/zaatar_baladi/kabeer.png",
+    "options": {
+      "sizes": [
+        {
+          "name": "كبير",
+          "priceAdd": 0,
+          "img": "images/mooneh/zaatar_baladi/kabeer.png"
+        },
+        {
+          "name": "صغير",
+          "priceAdd": -1.0,
+          "img": "images/mooneh/zaatar_baladi/kabeer.png"
+        }
+      ]
+    }
+  },
+  {
+    "id": 16,
+    "categoryId": "karat",
+    "name": "كرات اللبنة سبايسي",
+    "description": "كرات لبنة بلدية مغموسة بخلطة شطة حارة مميزة وزيت الزيتون، لمحبي النكهات القوية.",
+    "basePrice": 5.0,
+    "image": "images/karat/spicy_balls/kabeer.png",
+    "options": {
+      "sizes": [
+        {
+          "name": "كبير",
+          "priceAdd": 0,
+          "img": "images/karat/spicy_balls/kabeer.png"
+        },
+        {
+          "name": "صغير",
+          "priceAdd": -2.0,
+          "img": "images/karat/spicy_balls/sageer.png"
+        }
+      ]
+    }
+  }
+]
