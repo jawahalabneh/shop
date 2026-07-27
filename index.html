@@ -104,6 +104,40 @@
     background-image: radial-gradient(circle at 1px 1px, rgba(43,42,34,0.035) 1px, transparent 0);
     background-size: 14px 14px;
   }
+
+  /* Tap affordance on product cards */
+  .prod-add-badge{
+    position:absolute; bottom:8px; left:8px;
+    width:28px; height:28px; border-radius:9999px;
+    display:flex; align-items:center; justify-content:center;
+    background: var(--olive); color:#fff;
+    box-shadow: 0 2px 8px rgba(43,42,34,0.3);
+  }
+
+  /* Coming-soon products */
+  .prod-card-soon img{ filter: grayscale(55%); opacity:0.65; }
+  .soon-badge{
+    position:absolute; top:8px; right:8px;
+    background: var(--clay); color:#fff; font-weight:700; font-size:11px;
+    padding: 3px 10px; border-radius:9999px;
+  }
+
+  /* Floating "view cart" button (compact FAB, corner-docked) */
+  .floating-cart-fab{
+    position: fixed; bottom: 20px; left: 20px; z-index: 45;
+    width: 58px; height: 58px; border-radius: 9999px;
+    box-shadow: 0 8px 20px rgba(43,42,34,0.35);
+    transform: scale(0); opacity:0; pointer-events:none;
+    transition: transform .3s cubic-bezier(.34,1.56,.64,1), opacity .25s ease;
+  }
+  .floating-cart-fab.show{ transform: scale(1); opacity:1; pointer-events:auto; }
+  .fab-badge{
+    position:absolute; top:-4px; right:-4px;
+    min-width:22px; height:22px; padding:0 5px; border-radius:9999px;
+    background: var(--clay); color:#fff; font-size:12px; font-weight:700;
+    display:flex; align-items:center; justify-content:center;
+  }
+  body.cart-bar-visible main{ padding-bottom: 90px !important; }
 </style>
 </head>
 <body class="grain">
@@ -200,6 +234,9 @@
   <div id="cartItems" class="flex-1 overflow-y-auto px-5 py-4"></div>
 
   <div id="cartFooter" class="border-t px-5 py-4" style="border-color:var(--line)">
+    <button id="continueShoppingBtn" class="w-full py-3 rounded-2xl font-bold text-sm border-2" style="color:var(--olive-deep); border-color:var(--olive); background:transparent; margin-bottom:12px">
+      تصفح المزيد من المنتجات
+    </button>
     <div class="flex items-center justify-between mb-4">
       <span class="font-bold text-lg" style="color:var(--ink)">المجموع الكلي</span>
       <span id="cartTotal" class="font-display font-bold text-2xl" style="color:var(--olive-deep)">0.00 د.أ</span>
@@ -211,9 +248,17 @@
   </div>
 </div>
 
+<!-- ===================== FLOATING VIEW-CART BUTTON ===================== -->
+<div id="floatingCartBar" class="floating-cart-fab">
+  <button id="floatingCartBtn" class="w-full h-full flex items-center justify-center rounded-full relative" style="background:var(--olive)">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+    <span id="floatingCartText" class="fab-badge">0</span>
+  </button>
+</div>
+
 <!-- Toast -->
 <div id="toast" class="toast fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] text-white text-sm font-bold px-5 py-3 rounded-full" style="background:var(--ink)">
-  تمت الإضافة إلى السلة
+  <span id="toastText">تمت الإضافة إلى السلة</span>
 </div>
 
 <script>
@@ -266,13 +311,19 @@ function renderMenu(){
         <h2 class="font-display font-bold text-2xl mb-4" style="color:var(--olive-deep)">${CATEGORY_LABELS[cat]}</h2>
         <div class="grid grid-cols-2 gap-3">
           ${items.map(p => `
-            <button data-id="${p.id}" class="prod-card open-product text-right bg-white rounded-2xl overflow-hidden shadow-sm">
-              <div class="aspect-square overflow-hidden" style="background:var(--cream-deep)">
+            <button data-id="${p.id}" class="prod-card open-product text-right bg-white rounded-2xl overflow-hidden shadow-sm ${p.comingSoon ? 'prod-card-soon' : ''}">
+              <div class="aspect-square overflow-hidden relative" style="background:var(--cream-deep)">
                 <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover" loading="lazy">
+                ${p.comingSoon ? `<span class="soon-badge">قريباً</span>` : `
+                <span class="prod-add-badge">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                </span>`}
               </div>
               <div class="p-3">
                 <p class="font-bold text-sm leading-snug mb-1" style="color:var(--ink)">${p.name}</p>
-                <p class="font-display font-bold text-base" style="color:var(--olive-deep)">${money(p.basePrice)}</p>
+                ${p.comingSoon
+                  ? `<p class="font-display font-bold text-base" style="color:var(--ink-soft)">قريباً</p>`
+                  : `<p class="font-display font-bold text-base" style="color:var(--olive-deep)">${money(p.basePrice)}</p>`}
               </div>
             </button>
           `).join("")}
@@ -282,7 +333,15 @@ function renderMenu(){
   }).join("");
 
   container.querySelectorAll(".open-product").forEach(btn => {
-    btn.addEventListener("click", () => openProductSheet(parseInt(btn.dataset.id)));
+    btn.addEventListener("click", () => {
+      const id = parseInt(btn.dataset.id);
+      const p = PRODUCTS.find(x => x.id === id);
+      if(p && p.comingSoon){
+        showToast("هاد المنتج جاي قريباً 🌟");
+        return;
+      }
+      openProductSheet(id);
+    });
   });
 }
 
@@ -424,8 +483,9 @@ document.getElementById("addToCartBtn").addEventListener("click", () => {
   showToast();
 });
 
-function showToast(){
+function showToast(msg){
   const t = document.getElementById("toast");
+  document.getElementById("toastText").textContent = msg || "تمت الإضافة إلى السلة";
   t.classList.add("show");
   setTimeout(() => t.classList.remove("show"), 1800);
 }
@@ -434,6 +494,20 @@ function showToast(){
 function renderCartBadge(){
   const count = cart.reduce((sum, c) => sum + c.qty, 0);
   document.getElementById("cartBadge").textContent = count;
+  updateFloatingCartBar();
+}
+
+function updateFloatingCartBar(){
+  const bar = document.getElementById("floatingCartBar");
+  const count = cart.reduce((sum, c) => sum + c.qty, 0);
+  if(count === 0){
+    bar.classList.remove("show");
+    document.body.classList.remove("cart-bar-visible");
+    return;
+  }
+  document.getElementById("floatingCartText").textContent = count;
+  bar.classList.add("show");
+  document.body.classList.add("cart-bar-visible");
 }
 
 function renderCart(){
@@ -502,6 +576,8 @@ function closeCart(){
 document.getElementById("openCartBtn").addEventListener("click", openCart);
 document.getElementById("closeCartBtn").addEventListener("click", closeCart);
 document.getElementById("cartOverlay").addEventListener("click", closeCart);
+document.getElementById("floatingCartBtn").addEventListener("click", openCart);
+document.getElementById("continueShoppingBtn").addEventListener("click", closeCart);
 
 // ---------- WhatsApp checkout ----------
 document.getElementById("checkoutBtn").addEventListener("click", () => {
