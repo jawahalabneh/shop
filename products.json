@@ -392,5 +392,27 @@
         }
       ]
     }
+  },
+  {
+    "id": 17,
+    "categoryId": "karat",
+    "name": "لبنة زهرية",
+    "description": "لبنة بلدية ممزوجة بالشمندر والملفوف الأحمر، منكهة بالسماق البلدي والأوريجانو، طعم منعش ولون زهري طبيعي.",
+    "basePrice": 5.0,
+    "image": "images/karat/labneh_zahriya/kabeer.png",
+    "options": {
+      "sizes": [
+        {
+          "name": "كبير",
+          "priceAdd": 0,
+          "img": "images/karat/labneh_zahriya/kabeer.png"
+        },
+        {
+          "name": "صغير",
+          "priceAdd": -2.0,
+          "img": "images/karat/labneh_zahriya/sageer.png"
+        }
+      ]
+    }
   }
 ]
