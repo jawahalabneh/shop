@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لوحة تحكم — جواها لبنة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#faf6ee;
+    --cream-deep:#f1e9d8;
+    --ink:#2b2a22;
+    --ink-soft:#6b6a5f;
+    --olive:#6b7a4a;
+    --olive-deep:#4f5c35;
+    --olive-pale:#eef1e6;
+    --clay:#b5533c;
+    --clay-pale:#f5dcd5;
+    --line:#e4dcc8;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; font-family:'Cairo','Tahoma','Segoe UI',sans-serif;
+    background:var(--cream); color:var(--ink);
+    min-height:100vh;
+  }
+  header{
+    background:var(--olive-deep); color:#fff;
+    padding:16px 22px; display:flex; align-items:center; justify-content:space-between;
+    position:sticky; top:0; z-index:60;
+    box-shadow:0 2px 10px rgba(43,42,34,0.18);
+  }
+  header h1{ font-size:18px; margin:0; font-weight:800; letter-spacing:.2px; }
+  .container{ max-width:680px; margin:0 auto; padding:22px 20px 60px; }
+  .card{
+    background:#fff; border:1px solid var(--line); border-radius:16px;
+    padding:22px; margin-bottom:18px;
+    box-shadow:0 1px 3px rgba(43,42,34,0.05), 0 6px 18px rgba(43,42,34,0.04);
+  }
+  .card h2{
+    display:flex; align-items:center; gap:8px; font-size:17px;
+  }
+  label{ display:block; font-size:13px; font-weight:700; margin-bottom:6px; color:var(--ink-soft); }
+  input, select{
+    width:100%; padding:11px 13px; border:1.5px solid var(--line); border-radius:11px;
+    font-size:14px; margin-bottom:14px; background:var(--cream);
+    font-family:inherit; color:var(--ink);
+    transition:border-color .15s ease, box-shadow .15s ease;
+  }
+  input:focus, select:focus, textarea:focus{
+    outline:none; border-color:var(--olive); box-shadow:0 0 0 3px rgba(107,122,74,0.15);
+  }
+  button{
+    cursor:pointer; border:none; border-radius:11px; font-weight:700;
+    font-family:inherit; font-size:14px;
+    transition:background-color .15s ease, transform .1s ease, opacity .15s ease;
+  }
+  button:active{ transform:scale(0.98); }
+  button:disabled{ opacity:.6; cursor:default; transform:none; }
+  .btn-primary{
+    background:var(--olive); color:#fff; padding:13px 20px; width:100%;
+  }
+  .btn-primary:hover{ background:var(--olive-deep); }
+  .btn-secondary{
+    background:transparent; color:var(--olive-deep); border:1.5px solid var(--olive);
+    padding:8px 16px;
+  }
+  .btn-secondary:hover{ background:var(--olive-pale); }
+  .btn-logout{
+    background:rgba(255,255,255,0.15); color:#fff; padding:8px 14px; border-radius:10px;
+  }
+  .btn-logout:hover{ background:rgba(255,255,255,0.25); }
+  .hint{ font-size:12px; color:var(--ink-soft); margin:-8px 0 14px; line-height:1.65; }
+  .msg{ padding:12px 14px; border-radius:12px; font-size:13px; margin-bottom:14px; display:none; align-items:center; gap:8px; }
+  .msg.error{ background:#fbe4e0; color:#8a2f1f; display:flex; }
+  .msg.loading{ background:var(--olive-pale); color:var(--olive-deep); display:flex; }
+  .msg.success{ background:#e6efe0; color:var(--olive-deep); display:flex; }
+  .spinner{
+    width:14px; height:14px; border-radius:50%;
+    border:2px solid rgba(0,0,0,0.15); border-top-color:currentColor;
+    animation:spin .7s linear infinite; flex-shrink:0;
+  }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+  .tag{
+    display:inline-block; font-size:11px; font-weight:700; padding:3px 9px;
+    border-radius:999px; background:var(--cream-deep); color:var(--olive-deep);
+  }
+  .tag.soon{ background:var(--clay-pale); color:var(--clay); }
+  .top-row{ display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; flex-wrap:wrap; gap:8px; }
+  .conn-info{ font-size:12px; color:var(--ink-soft); }
+
+  textarea{
+    width:100%; padding:11px 13px; border:1.5px solid var(--line); border-radius:11px;
+    font-size:14px; margin-bottom:14px; background:var(--cream);
+    font-family:inherit; color:var(--ink); resize:vertical; min-height:70px;
+  }
+  .btn-sm{ padding:7px 13px; font-size:12px; }
+  .btn-add{ background:var(--olive-deep); color:#fff; padding:11px 18px; margin-bottom:16px; }
+  .btn-add:hover{ background:var(--ink); }
+  .btn-danger-outline{ background:transparent; color:var(--clay); border:1.5px solid var(--clay); padding:7px 13px; font-size:12px; }
+  .btn-danger-outline:hover{ background:var(--clay-pale); }
+  .checkbox-row{ display:flex; align-items:center; gap:8px; margin-bottom:14px; }
+  .checkbox-row input{ width:auto; margin:0; }
+  .checkbox-row label{ margin:0; }
+  .option-block{ border:1.5px dashed var(--line); border-radius:12px; padding:14px; margin-bottom:14px; background:var(--cream); }
+  .option-row{ display:flex; gap:8px; align-items:flex-end; margin-bottom:10px; flex-wrap:wrap; }
+  .option-row input{ margin-bottom:0; }
+  .option-row .col-name{ flex:2; min-width:110px; }
+  .option-row .col-price{ flex:1; min-width:90px; }
+  .option-row .col-img{ flex:2; min-width:140px; }
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(43,42,34,0.5); z-index:50;
+    display:flex; align-items:flex-start; justify-content:center; overflow-y:auto; padding:24px 16px;
+  }
+  .modal-box{
+    background:#fff; border-radius:18px; max-width:560px; width:100%;
+    max-height:calc(100vh - 48px); display:flex; flex-direction:column; overflow:hidden;
+    box-shadow:0 20px 50px rgba(43,42,34,0.25);
+  }
+  .modal-body{ padding:24px 24px 4px; overflow-y:auto; flex:1; }
+  .modal-footer{
+    padding:16px 24px; border-top:1px solid var(--line); background:#fff;
+    display:flex; gap:10px;
+  }
+  .actions-cell{ display:flex; flex-wrap:wrap; gap:6px; }
+
+  /* بطاقات المنتجات (بدل الجدول، أسهل على الموبايل) */
+  .product-row{
+    display:flex; align-items:flex-start; justify-content:space-between; gap:10px;
+    padding:14px 4px; border-bottom:1px solid var(--line); flex-wrap:wrap;
+  }
+  .product-row:last-child{ border-bottom:none; }
+  .product-row-info{ flex:1; min-width:200px; }
+  .product-row-name{ font-weight:700; font-size:14.5px; margin-bottom:4px; }
+  .product-row-meta{ font-size:12.5px; color:var(--ink-soft); margin-bottom:6px; }
+  .product-row-tags{ display:flex; flex-wrap:wrap; gap:6px; }
+  .product-row-actions{ display:flex; flex-wrap:wrap; gap:6px; align-items:flex-start; }
+
+  .category-row{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:10px 2px; border-bottom:1px solid var(--line);
+  }
+  .category-row:last-child{ border-bottom:none; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>لوحة تحكم — جواها لبنة</h1>
+  <button id="logoutBtn" class="btn-logout" style="display:none">تسجيل خروج</button>
+</header>
+
+<div id="passwordScreen" class="container" style="display:none">
+  <div class="card">
+    <h2 style="margin-top:0">دخول محمي</h2>
+    <label for="pwInput">كلمة المرور</label>
+    <input type="password" id="pwInput" placeholder="اكتب كلمة المرور">
+    <div id="pwMsg" class="msg error"></div>
+    <button id="pwBtn" class="btn-primary">دخول</button>
+  </div>
+</div>
+
+<div id="container-main" class="container">
+
+  <!-- شاشة تسجيل الدخول -->
+  <div id="loginScreen" class="card">
+    <h2 style="margin-top:0">الاتصال بالموقع</h2>
+    <p class="hint">
+      عبّئ البيانات التالية مرة وحدة. رمز الدخول (Token) رح ينحفظ بشكل دائم على هاد الجهاز، وما رح يطلبه منك تاني إلا إذا ضغطت "تسجيل خروج" بنفسك. لا تدخله على جهاز مشترك مع حدا غيرك.
+    </p>
+
+    <label for="cfgOwner">اسم المستخدم/المنظمة على GitHub</label>
+    <input type="text" id="cfgOwner" placeholder="مثال: jawahalabneh">
+
+    <label for="cfgRepo">اسم الريبو (Repository)</label>
+    <input type="text" id="cfgRepo" placeholder="مثال: shop-test">
+
+    <label for="cfgBranch">اسم الفرع (Branch)</label>
+    <input type="text" id="cfgBranch" value="main">
+
+    <label for="cfgToken">رمز الدخول (Personal Access Token)</label>
+    <input type="password" id="cfgToken" placeholder="ghp_... أو github_pat_...">
+    <p class="hint">
+      لازم يكون التوكن معمول خصيصاً لهاد الريبو بس (Fine-grained token)، وصلاحيته "Contents: Read and write".
+    </p>
+
+    <div id="loginMsg" class="msg error"></div>
+
+    <button id="loginBtn" class="btn-primary">دخول</button>
+  </div>
+
+  <!-- شاشة اللوحة -->
+  <div id="adminScreen" style="display:none">
+    <div class="top-row">
+      <div class="conn-info">متصل بـ: <span id="connInfo"></span></div>
+      <button id="changeConnBtn" class="btn-secondary">تغيير الإعدادات</button>
+    </div>
+
+    <div id="statusMsg" class="msg"></div>
+
+    <div class="card">
+      <h2 style="margin-top:0">الأقسام</h2>
+      <div id="categoriesWrap"></div>
+      <div style="display:flex; gap:8px; margin-top:12px">
+        <input type="text" id="newCategoryLabel" placeholder="اسم قسم جديد (مثال: مشروبات)" style="margin-bottom:0">
+        <button id="addCategoryBtn" class="btn-primary" style="width:auto; white-space:nowrap">+ إضافة قسم</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 style="margin-top:0">المنتجات الحالية</h2>
+      <button id="addProductBtn" class="btn-add">+ إضافة منتج جديد</button>
+      <div id="productsWrap"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- نموذج إضافة/تعديل منتج -->
+<div id="formOverlay" class="modal-overlay" style="display:none">
+  <div class="modal-box">
+    <div class="modal-body">
+    <h2 id="formTitle" style="margin-top:0">إضافة منتج جديد</h2>
+
+    <div id="formMsg" class="msg error"></div>
+
+    <label for="f_categoryId">التصنيف</label>
+    <select id="f_categoryId"></select>
+
+    <label for="f_name">اسم المنتج</label>
+    <input type="text" id="f_name" placeholder="مثال: لبنة زهرية">
+
+    <label for="f_description">الوصف</label>
+    <textarea id="f_description" placeholder="وصف قصير للمنتج"></textarea>
+
+    <label for="f_basePrice">السعر الأساسي (د.أ)</label>
+    <input type="number" id="f_basePrice" step="0.01" min="0">
+
+    <label for="f_imageFile">صورة المنتج الرئيسية</label>
+    <div id="f_imagePreviewWrap" style="margin-bottom:10px"></div>
+    <input type="file" id="f_imageFile" accept="image/*">
+    <p class="hint">
+      اختر صورة من جهازك/جوالك — بتنصغّر وبتنرفع للموقع تلقائياً.
+    </p>
+
+    <div class="checkbox-row">
+      <input type="checkbox" id="f_comingSoon">
+      <label for="f_comingSoon">هاد المنتج "قريباً" (مش متوفر للطلب حالياً)</label>
+    </div>
+
+    <div class="checkbox-row">
+      <input type="checkbox" id="f_hidden">
+      <label for="f_hidden">إخفاء المنتج مؤقتاً (ما يظهر بالموقع خالص)</label>
+    </div>
+
+    <div class="checkbox-row">
+      <input type="checkbox" id="f_hasSizes">
+      <label for="f_hasSizes">فيه أحجام مختلفة (كبير/صغير...)</label>
+    </div>
+    <div id="sizesBlock" class="option-block" style="display:none">
+      <div id="sizesRows"></div>
+      <button id="addSizeBtn" type="button" class="btn-secondary btn-sm">+ إضافة حجم</button>
+    </div>
+
+    <div class="checkbox-row">
+      <input type="checkbox" id="f_hasFlavors">
+      <label for="f_hasFlavors">فيه نكهات مختلفة</label>
+    </div>
+    <div id="flavorsBlock" class="option-block" style="display:none">
+      <div id="flavorsRows"></div>
+      <button id="addFlavorBtn" type="button" class="btn-secondary btn-sm">+ إضافة نكهة</button>
+    </div>
+    </div>
+
+    <div class="modal-footer">
+      <button id="saveProductBtn" class="btn-primary">حفظ على الموقع</button>
+      <button id="cancelFormBtn" class="btn-secondary">إلغاء</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const CONFIG_KEY = "jawaha_admin_config";
+const TOKEN_KEY  = "jawaha_admin_token"; // محفوظ بشكل دائم على هاد الجهاز (localStorage)
+
+let currentCfg = null;
+let currentToken = null;
+let currentProducts = [];
+let currentSha = null;
+let currentCategories = [];
+let currentCategoriesSha = null;
+let editingId = null; // null = إضافة منتج جديد
+let isEditingExisting = false; // true فقط لما نعدّل منتج موجود فعلياً (مش نسخ)
+
+let mainImageFile = null;        // ملف الصورة الرئيسية الجديد (لو اختير)
+let currentMainImagePath = null; // مسار الصورة الحالية (عند التعديل)
+
+function getConfig(){
+  try{ return JSON.parse(localStorage.getItem(CONFIG_KEY) || "null"); }
+  catch(e){ return null; }
+}
+
+function saveConfig(cfg){
+  localStorage.setItem(CONFIG_KEY, JSON.stringify(cfg));
+}
+
+function clearSession(){
+  localStorage.removeItem(TOKEN_KEY);
+}
+
+// فك تشفير base64 يدعم العربي بشكل صحيح
+function b64DecodeUnicode(str){
+  const clean = str.replace(/\n/g, "");
+  return decodeURIComponent(
+    atob(clean).split("").map(c => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2)).join("")
+  );
+}
+
+// تشفير base64 يدعم العربي بشكل صحيح
+function b64EncodeUnicode(str){
+  return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
+    (match, p1) => String.fromCharCode("0x" + p1)));
+}
+
+function showLoginMsg(text){
+  const el = document.getElementById("loginMsg");
+  if(!text){ el.style.display = "none"; return; }
+  el.textContent = text;
+  el.style.display = "block";
+}
+
+function showStatus(text, type){
+  const el = document.getElementById("statusMsg");
+  const kind = type || "loading";
+  el.className = "msg " + kind;
+  el.innerHTML = (kind === "loading" ? "<span class='spinner'></span>" : "") + "<span>" + escapeHtml(text) + "</span>";
+  el.style.display = "flex";
+}
+
+function hideStatus(){
+  document.getElementById("statusMsg").style.display = "none";
+}
+
+async function fetchProductsJson(cfg, token){
+  const url = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/products.json?ref=${encodeURIComponent(cfg.branch)}`;
+  const res = await fetch(url, {
+    headers: {
+      "Authorization": `Bearer ${token}`,
+      "Accept": "application/vnd.github+json"
+    }
+  });
+
+  if(!res.ok){
+    if(res.status === 401) throw new Error("رمز الدخول (Token) غير صحيح أو منتهي الصلاحية.");
+    if(res.status === 403) throw new Error("التوكن ما إله صلاحية كافية على هاد الريبو. تأكد من صلاحية Contents.");
+    if(res.status === 404) throw new Error("ما لقيت الملف — تأكد من اسم المستخدم/الريبو/الفرع (products.json لازم يكون بجذر الريبو).");
+    throw new Error("صار خطأ بالاتصال (كود " + res.status + ").");
+  }
+
+  const data = await res.json();
+  const text = b64DecodeUnicode(data.content);
+  return { products: JSON.parse(text), sha: data.sha };
+}
+
+async function saveProductsToGithub(cfg, token, products, sha, message){
+  const url = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/products.json`;
+  const content = b64EncodeUnicode(JSON.stringify(products, null, 2));
+
+  const res = await fetch(url, {
+    method: "PUT",
+    headers: {
+      "Authorization": `Bearer ${token}`,
+      "Accept": "application/vnd.github+json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ message, content, sha, branch: cfg.branch })
+  });
+
+  if(!res.ok){
+    if(res.status === 409) throw new Error("الملف تغيّر على الموقع من مكان تاني بعد ما فتحت اللوحة. اضغط \"تحديث القائمة\" وحاول من جديد.");
+    if(res.status === 401) throw new Error("رمز الدخول (Token) غير صحيح أو منتهي الصلاحية.");
+    if(res.status === 403) throw new Error("التوكن ما إله صلاحية كتابة (Write) على هاد الريبو.");
+    throw new Error("صار خطأ أثناء الحفظ (كود " + res.status + ").");
+  }
+
+  const data = await res.json();
+  return data.content.sha;
+}
+
+async function fetchCategoriesJson(cfg, token){
+  const url = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/categories.json?ref=${encodeURIComponent(cfg.branch)}`;
+  const res = await fetch(url, {
+    headers: {
+      "Authorization": `Bearer ${token}`,
+      "Accept": "application/vnd.github+json"
+    }
+  });
+
+  if(!res.ok){
+    if(res.status === 401) throw new Error("رمز الدخول (Token) غير صحيح أو منتهي الصلاحية.");
+    if(res.status === 403) throw new Error("التوكن ما إله صلاحية كافية على هاد الريبو.");
+    if(res.status === 404) throw new Error("ما لقيت ملف categories.json — تأكد إنه موجود بجذر الريبو.");
+    throw new Error("صار خطأ بالاتصال (كود " + res.status + ").");
+  }
+
+  const data = await res.json();
+  const text = b64DecodeUnicode(data.content);
+  return { categories: JSON.parse(text), sha: data.sha };
+}
+
+async function saveCategoriesToGithub(cfg, token, categories, sha, message){
+  const url = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/categories.json`;
+  const content = b64EncodeUnicode(JSON.stringify(categories, null, 2));
+
+  const res = await fetch(url, {
+    method: "PUT",
+    headers: {
+      "Authorization": `Bearer ${token}`,
+      "Accept": "application/vnd.github+json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ message, content, sha, branch: cfg.branch })
+  });
+
+  if(!res.ok){
+    if(res.status === 409) throw new Error("ملف الأقسام تغيّر من مكان تاني. حدّث الصفحة وحاول من جديد.");
+    if(res.status === 401) throw new Error("رمز الدخول (Token) غير صحيح أو منتهي الصلاحية.");
+    if(res.status === 403) throw new Error("التوكن ما إله صلاحية كتابة (Write) على هاد الريبو.");
+    throw new Error("صار خطأ أثناء حفظ الأقسام (كود " + res.status + ").");
+  }
+
+  const data = await res.json();
+  return data.content.sha;
+}
+
+// تصغير الصورة قبل الرفع (أقصى بعد ١٠٠٠px) وتحويلها JPEG لتصغير الحجم
+function resizeImageFile(file, maxDim = 1000, quality = 0.82){
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => {
+        let { width, height } = img;
+        if(width > maxDim || height > maxDim){
+          if(width > height){ height = Math.round(height * maxDim / width); width = maxDim; }
+          else{ width = Math.round(width * maxDim / height); height = maxDim; }
+        }
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, width, height);
+        const dataUrl = canvas.toDataURL("image/jpeg", quality);
+        resolve(dataUrl.split(",")[1]);
+      };
+      img.onerror = () => reject(new Error("تعذر قراءة الصورة المختارة."));
+      img.src = e.target.result;
+    };
+    reader.onerror = () => reject(new Error("تعذر فتح ملف الصورة."));
+    reader.readAsDataURL(file);
+  });
+}
+
+// جيب sha للصورة الحالية لو موجودة أصلاً (لازمة لتحديث ملف موجود)
+async function getExistingFileSha(cfg, token, path){
+  const url = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${path}?ref=${encodeURIComponent(cfg.branch)}`;
+  const res = await fetch(url, {
+    headers: { "Authorization": `Bearer ${token}`, "Accept": "application/vnd.github+json" }
+  });
+  if(res.status === 404) return null;
+  if(!res.ok) throw new Error("تعذر التحقق من الصورة الحالية (كود " + res.status + ").");
+  const data = await res.json();
+  return data.sha;
+}
+
+async function uploadImageToGithub(cfg, token, path, base64Content, message){
+  const sha = await getExistingFileSha(cfg, token, path);
+  const url = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${path}`;
+  const body = { message, content: base64Content, branch: cfg.branch };
+  if(sha) body.sha = sha;
+
+  const res = await fetch(url, {
+    method: "PUT",
+    headers: {
+      "Authorization": `Bearer ${token}`,
+      "Accept": "application/vnd.github+json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(body)
+  });
+
+  if(!res.ok){
+    if(res.status === 409) throw new Error("صار تعارض أثناء رفع الصورة، حاول كمان مرة.");
+    if(res.status === 401) throw new Error("رمز الدخول غير صحيح أو منتهي الصلاحية.");
+    if(res.status === 403) throw new Error("التوكن ما إله صلاحية كتابة كافية لرفع الصور.");
+    throw new Error("تعذر رفع الصورة (كود " + res.status + ").");
+  }
+}
+
+function renderProducts(products){
+  const wrap = document.getElementById("productsWrap");
+  if(!products.length){
+    wrap.innerHTML = "<p class='hint'>ما في منتجات بالملف حالياً.</p>";
+    return;
+  }
+  const rows = products.map(p => `
+    <div class="product-row">
+      <div class="product-row-info">
+        <div class="product-row-name">${escapeHtml(p.name || "")}</div>
+        <div class="product-row-meta">${escapeHtml(categoryLabel(p.categoryId))} · ${(p.basePrice ?? "").toString()} د.أ</div>
+        <div class="product-row-tags">
+          ${p.options?.sizes ? "<span class='tag'>أحجام</span>" : ""}
+          ${p.options?.flavors ? "<span class='tag'>نكهات</span>" : ""}
+          ${p.comingSoon ? "<span class='tag soon'>قريباً</span>" : ""}
+          ${p.hidden ? "<span class='tag soon'>مخفي</span>" : ""}
+        </div>
+      </div>
+      <div class="product-row-actions">
+        <button class="btn-secondary btn-sm edit-btn" data-id="${p.id}">تعديل</button>
+        <button class="btn-secondary btn-sm duplicate-btn" data-id="${p.id}">نسخ</button>
+        <button class="btn-danger-outline btn-sm delete-btn" data-id="${p.id}">حذف</button>
+      </div>
+    </div>
+  `).join("");
+
+  wrap.innerHTML = `
+    ${rows}
+    <p class="hint" style="margin-top:12px">
+      إجمالي المنتجات: ${products.length}
+    </p>
+  `;
+
+  wrap.querySelectorAll(".edit-btn").forEach(btn => {
+    btn.addEventListener("click", () => openForm(parseInt(btn.dataset.id), false));
+  });
+  wrap.querySelectorAll(".duplicate-btn").forEach(btn => {
+    btn.addEventListener("click", () => openForm(parseInt(btn.dataset.id), true));
+  });
+  wrap.querySelectorAll(".delete-btn").forEach(btn => {
+    btn.addEventListener("click", () => deleteProduct(parseInt(btn.dataset.id)));
+  });
+}
+
+async function deleteProduct(id){
+  const product = currentProducts.find(p => p.id === id);
+  if(!product) return;
+
+  const confirmed = confirm(`متأكد بدك تحذف "${product.name}"؟ هاد الإجراء ما ممكن يتراجع عنه.`);
+  if(!confirmed) return;
+
+  showStatus("عم نحذف المنتج...", "loading");
+  try{
+    const updatedProducts = currentProducts.filter(p => p.id !== id);
+    const newSha = await saveProductsToGithub(
+      currentCfg, currentToken, updatedProducts, currentSha,
+      `حذف منتج: ${product.name}`
+    );
+    currentProducts = updatedProducts;
+    currentSha = newSha;
+    renderProducts(currentProducts);
+    populateCategoryOptions(currentCategories);
+    showStatus(`تم حذف "${product.name}" ✓`, "success");
+  }catch(err){
+    showStatus(err.message, "error");
+  }
+}
+
+function escapeHtml(str){
+  return String(str)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
+}
+
+async function connectAndLoad(cfg, token){
+  showStatus("عم نتصل ونجيب البيانات...", "loading");
+  try{
+    const [{ products, sha }, { categories, sha: catSha }] = await Promise.all([
+      fetchProductsJson(cfg, token),
+      fetchCategoriesJson(cfg, token)
+    ]);
+    currentCfg = cfg;
+    currentToken = token;
+    currentProducts = products;
+    currentSha = sha;
+    currentCategories = categories;
+    currentCategoriesSha = catSha;
+
+    document.getElementById("connInfo").textContent = `${cfg.owner}/${cfg.repo} (${cfg.branch})`;
+    hideStatus();
+    renderCategories(currentCategories);
+    renderProducts(products);
+    populateCategoryOptions(currentCategories);
+    document.getElementById("loginScreen").style.display = "none";
+    document.getElementById("adminScreen").style.display = "block";
+    document.getElementById("logoutBtn").style.display = "inline-block";
+  }catch(err){
+    showStatus(err.message, "error");
+    document.getElementById("loginScreen").style.display = "block";
+    document.getElementById("adminScreen").style.display = "none";
+    document.getElementById("logoutBtn").style.display = "none";
+  }
+}
+
+function categoryLabel(id){
+  const c = currentCategories.find(c => c.id === id);
+  return c ? c.label : id;
+}
+
+function populateCategoryOptions(categories){
+  const select = document.getElementById("f_categoryId");
+  select.innerHTML = categories.map(c => `<option value="${escapeHtml(c.id)}">${escapeHtml(c.label)}</option>`).join("");
+}
+
+function renderCategories(categories){
+  const wrap = document.getElementById("categoriesWrap");
+  if(!categories.length){
+    wrap.innerHTML = "<p class='hint'>ما في أقسام بعد.</p>";
+    return;
+  }
+  wrap.innerHTML = categories.map(c => `
+    <div class="category-row">
+      <span>${escapeHtml(c.label)}</span>
+      <button class="btn-danger-outline btn-sm delete-cat-btn" data-id="${escapeHtml(c.id)}">حذف</button>
+    </div>
+  `).join("");
+
+  wrap.querySelectorAll(".delete-cat-btn").forEach(btn => {
+    btn.addEventListener("click", () => deleteCategory(btn.dataset.id));
+  });
+}
+
+async function deleteCategory(id){
+  const cat = currentCategories.find(c => c.id === id);
+  if(!cat) return;
+
+  const inUse = currentProducts.some(p => p.categoryId === id);
+  if(inUse){
+    alert(`ما بقدر أحذف قسم "${cat.label}" لأنه لسا فيه منتجات تابعة إله. انقل أو احذف هاي المنتجات أول.`);
+    return;
+  }
+
+  const confirmed = confirm(`متأكد بدك تحذف قسم "${cat.label}"؟`);
+  if(!confirmed) return;
+
+  showStatus("عم نحذف القسم...", "loading");
+  try{
+    const updated = currentCategories.filter(c => c.id !== id);
+    const newSha = await saveCategoriesToGithub(currentCfg, currentToken, updated, currentCategoriesSha, `حذف قسم: ${cat.label}`);
+    currentCategories = updated;
+    currentCategoriesSha = newSha;
+    renderCategories(currentCategories);
+    populateCategoryOptions(currentCategories);
+    renderProducts(currentProducts);
+    showStatus(`تم حذف قسم "${cat.label}" ✓`, "success");
+  }catch(err){
+    showStatus(err.message, "error");
+  }
+}
+
+document.getElementById("addCategoryBtn").addEventListener("click", async () => {
+  const label = document.getElementById("newCategoryLabel").value.trim();
+  if(!label){
+    showStatus("لازم تكتب اسم القسم أول.", "error");
+    return;
+  }
+
+  const id = "cat-" + Date.now();
+  const btn = document.getElementById("addCategoryBtn");
+  btn.disabled = true;
+  showStatus("عم نضيف القسم...", "loading");
+  try{
+    const updated = [...currentCategories, { id, label }];
+    const newSha = await saveCategoriesToGithub(currentCfg, currentToken, updated, currentCategoriesSha, `إضافة قسم جديد: ${label}`);
+    currentCategories = updated;
+    currentCategoriesSha = newSha;
+    renderCategories(currentCategories);
+    populateCategoryOptions(currentCategories);
+    document.getElementById("newCategoryLabel").value = "";
+    showStatus(`تم إضافة قسم "${label}" ✓`, "success");
+  }catch(err){
+    showStatus(err.message, "error");
+  }finally{
+    btn.disabled = false;
+  }
+});
+
+
+document.getElementById("loginBtn").addEventListener("click", () => {
+  const owner  = document.getElementById("cfgOwner").value.trim();
+  const repo   = document.getElementById("cfgRepo").value.trim();
+  const branch = document.getElementById("cfgBranch").value.trim() || "main";
+  const token  = document.getElementById("cfgToken").value.trim();
+
+  if(!owner || !repo || !token){
+    showLoginMsg("لازم تعبّئ اسم المستخدم واسم الريبو ورمز الدخول.");
+    return;
+  }
+  showLoginMsg("");
+
+  const cfg = { owner, repo, branch };
+  saveConfig(cfg);
+  localStorage.setItem(TOKEN_KEY, token);
+  connectAndLoad(cfg, token);
+});
+
+document.getElementById("logoutBtn").addEventListener("click", () => {
+  clearSession();
+  sessionStorage.removeItem(PW_OK_KEY);
+  document.getElementById("cfgToken").value = "";
+  document.getElementById("pwInput").value = "";
+  document.getElementById("adminScreen").style.display = "none";
+  document.getElementById("logoutBtn").style.display = "none";
+  document.getElementById("loginScreen").style.display = "block";
+  document.getElementById("container-main").style.display = "none";
+  document.getElementById("passwordScreen").style.display = "block";
+});
+
+document.getElementById("changeConnBtn").addEventListener("click", () => {
+  document.getElementById("adminScreen").style.display = "none";
+  document.getElementById("logoutBtn").style.display = "none";
+  document.getElementById("loginScreen").style.display = "block";
+});
+
+// ---------- فورم إضافة/تعديل منتج ----------
+let formSizes = [];
+let formFlavors = [];
+
+function showFormMsg(text){
+  const el = document.getElementById("formMsg");
+  if(!text){ el.style.display = "none"; return; }
+  el.textContent = text;
+  el.style.display = "block";
+}
+
+function openForm(id, asDuplicate){
+  editingId = (id && !asDuplicate) ? id : null;
+  isEditingExisting = !!(id && !asDuplicate);
+  showFormMsg("");
+  const product = id ? currentProducts.find(p => p.id === id) : null;
+
+  document.getElementById("formTitle").textContent =
+    asDuplicate ? "نسخ منتج (كمنتج جديد)" : (product ? "تعديل منتج" : "إضافة منتج جديد");
+  document.getElementById("f_categoryId").value = product?.categoryId || document.getElementById("f_categoryId").value;
+  document.getElementById("f_name").value = asDuplicate ? `${product.name} (نسخة)` : (product?.name || "");
+  document.getElementById("f_description").value = product?.description || "";
+  document.getElementById("f_basePrice").value = product?.basePrice ?? "";
+  document.getElementById("f_comingSoon").checked = !!product?.comingSoon;
+  document.getElementById("f_hidden").checked = asDuplicate ? false : !!product?.hidden;
+
+  mainImageFile = null;
+  currentMainImagePath = product?.image || null;
+  document.getElementById("f_imageFile").value = "";
+  renderMainImagePreview();
+  if(asDuplicate && currentMainImagePath){
+    showFormMsg("النسخة رح تستخدم نفس الصورة الرئيسية للمنتج الأصلي مبدئياً (وبتنطبق تلقائياً على كل الأحجام والنكهات إذا ما إلها صور خاصة). لو رفعت صورة رئيسية جديدة، هي رح تصير صورة الأساس لكل شي بالنسخة. لو حبيت صورة مختلفة لحجم/نكهة معيّن بالنسخة، ارفعها من نفس صف الحجم/النكهة.");
+  }
+
+  formSizes = product?.options?.sizes ? JSON.parse(JSON.stringify(product.options.sizes)) : [];
+  formFlavors = product?.options?.flavors ? JSON.parse(JSON.stringify(product.options.flavors)) : [];
+
+  if(asDuplicate){
+    // عند النسخ، ما بنورّث صور الأحجام/النكهات القديمة —
+    // هيك أي حجم/نكهة بلا صورة خاصة بيرجع يستخدم الصورة الرئيسية الجديدة تلقائياً
+    formSizes = formSizes.map(s => ({ name: s.name, priceAdd: s.priceAdd }));
+    formFlavors = formFlavors.map(f => ({ name: f.name, priceAdd: f.priceAdd }));
+  }
+
+  document.getElementById("f_hasSizes").checked = formSizes.length > 0;
+  document.getElementById("f_hasFlavors").checked = formFlavors.length > 0;
+  document.getElementById("sizesBlock").style.display = formSizes.length ? "block" : "none";
+  document.getElementById("flavorsBlock").style.display = formFlavors.length ? "block" : "none";
+
+  renderOptionRows("sizesRows", formSizes, "size");
+  renderOptionRows("flavorsRows", formFlavors, "flavor");
+
+  document.getElementById("formOverlay").style.display = "flex";
+}
+
+function closeForm(){
+  document.getElementById("formOverlay").style.display = "none";
+}
+
+function renderMainImagePreview(){
+  const wrap = document.getElementById("f_imagePreviewWrap");
+  if(currentMainImagePath && currentCfg){
+    const url = `https://raw.githubusercontent.com/${currentCfg.owner}/${currentCfg.repo}/${currentCfg.branch}/${currentMainImagePath}`;
+    wrap.innerHTML = `
+      <div style="display:flex; align-items:center; gap:10px">
+        <img src="${url}" style="width:64px;height:64px;object-fit:cover;border-radius:10px;border:1px solid var(--line)" onerror="this.style.display='none'">
+        <span class="hint" style="margin:0">الصورة الحالية — اختر صورة جديدة بس إذا بدك تغييرها</span>
+      </div>`;
+  }else{
+    wrap.innerHTML = `<p class="hint" style="margin:0">ما في صورة بعد — لازم تختار وحدة.</p>`;
+  }
+}
+
+document.getElementById("f_imageFile").addEventListener("change", (e) => {
+  mainImageFile = e.target.files[0] || null;
+});
+
+function renderOptionRows(containerId, list, kind){
+  const wrap = document.getElementById(containerId);
+  wrap.innerHTML = list.map((item, idx) => `
+    <div class="option-row">
+      <div class="col-name">
+        <label>الاسم</label>
+        <input type="text" data-kind="${kind}" data-idx="${idx}" data-field="name" value="${escapeHtml(item.name || "")}">
+      </div>
+      <div class="col-price">
+        <label>فرق السعر</label>
+        <input type="number" step="0.01" data-kind="${kind}" data-idx="${idx}" data-field="priceAdd" value="${item.priceAdd ?? 0}">
+      </div>
+      <div class="col-img">
+        <label>صورة مخصصة (اختياري)</label>
+        <input type="file" accept="image/*" class="opt-img-input" data-kind="${kind}" data-idx="${idx}">
+        ${item.img ? `<p class="hint" style="margin:4px 0 0">فيه صورة محفوظة أصلاً — اختر صورة بس إذا بدك تغييرها</p>` : ``}
+      </div>
+      <button type="button" class="btn-danger-outline remove-row-btn" data-kind="${kind}" data-idx="${idx}">حذف</button>
+    </div>
+  `).join("");
+
+  wrap.querySelectorAll('input[type="text"], input[type="number"]').forEach(input => {
+    input.addEventListener("input", () => {
+      const idx = parseInt(input.dataset.idx);
+      const field = input.dataset.field;
+      const list = input.dataset.kind === "size" ? formSizes : formFlavors;
+      list[idx][field] = field === "priceAdd" ? parseFloat(input.value || "0") : input.value;
+    });
+  });
+
+  wrap.querySelectorAll(".opt-img-input").forEach(input => {
+    input.addEventListener("change", () => {
+      const idx = parseInt(input.dataset.idx);
+      const list = input.dataset.kind === "size" ? formSizes : formFlavors;
+      list[idx]._file = input.files[0] || null;
+    });
+  });
+
+  wrap.querySelectorAll(".remove-row-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const idx = parseInt(btn.dataset.idx);
+      if(btn.dataset.kind === "size"){ formSizes.splice(idx, 1); renderOptionRows("sizesRows", formSizes, "size"); }
+      else{ formFlavors.splice(idx, 1); renderOptionRows("flavorsRows", formFlavors, "flavor"); }
+    });
+  });
+}
+
+document.getElementById("addProductBtn").addEventListener("click", () => openForm(null));
+document.getElementById("cancelFormBtn").addEventListener("click", closeForm);
+
+document.getElementById("f_hasSizes").addEventListener("change", (e) => {
+  document.getElementById("sizesBlock").style.display = e.target.checked ? "block" : "none";
+  if(!e.target.checked){ formSizes = []; }
+  else if(formSizes.length === 0){ formSizes.push({ name: "كبير", priceAdd: 0 }); renderOptionRows("sizesRows", formSizes, "size"); }
+});
+
+document.getElementById("f_hasFlavors").addEventListener("change", (e) => {
+  document.getElementById("flavorsBlock").style.display = e.target.checked ? "block" : "none";
+  if(!e.target.checked){ formFlavors = []; }
+  else if(formFlavors.length === 0){ formFlavors.push({ name: "عادي", priceAdd: 0 }); renderOptionRows("flavorsRows", formFlavors, "flavor"); }
+});
+
+document.getElementById("addSizeBtn").addEventListener("click", () => {
+  formSizes.push({ name: "", priceAdd: 0 });
+  renderOptionRows("sizesRows", formSizes, "size");
+});
+
+document.getElementById("addFlavorBtn").addEventListener("click", () => {
+  formFlavors.push({ name: "", priceAdd: 0 });
+  renderOptionRows("flavorsRows", formFlavors, "flavor");
+});
+
+document.getElementById("saveProductBtn").addEventListener("click", async () => {
+  const name = document.getElementById("f_name").value.trim();
+  const categoryId = document.getElementById("f_categoryId").value;
+  const basePriceRaw = document.getElementById("f_basePrice").value;
+
+  if(!name || !categoryId || basePriceRaw === ""){
+    showFormMsg("لازم تعبّئ: اسم المنتج، التصنيف، والسعر الأساسي.");
+    return;
+  }
+  if(!mainImageFile && !currentMainImagePath){
+    showFormMsg("لازم تختار صورة رئيسية للمنتج.");
+    return;
+  }
+
+  const id = editingId || (Math.max(0, ...currentProducts.map(p => p.id)) + 1);
+
+  const product = {
+    id,
+    categoryId,
+    name,
+    description: document.getElementById("f_description").value.trim(),
+    basePrice: parseFloat(basePriceRaw)
+  };
+
+  if(document.getElementById("f_comingSoon").checked) product.comingSoon = true;
+  if(document.getElementById("f_hidden").checked) product.hidden = true;
+
+  showFormMsg("");
+  const btn = document.getElementById("saveProductBtn");
+  btn.disabled = true;
+
+  try{
+    // ١) رفع الصورة الرئيسية (بس إذا فيه صورة جديدة مختارة)
+    let mainPath = currentMainImagePath;
+    if(mainImageFile){
+      btn.textContent = "عم نرفع الصورة الرئيسية...";
+      mainPath = (isEditingExisting && currentMainImagePath) ? currentMainImagePath : `images/${categoryId}/product-${id}/main.jpg`;
+      const base64 = await resizeImageFile(mainImageFile);
+      await uploadImageToGithub(currentCfg, currentToken, mainPath, base64, `رفع صورة منتج: ${name}`);
+    }
+    product.image = mainPath;
+
+    // ٢) رفع صور الأحجام (كل حجم صورته اختيارية)
+    const sizesToSave = [];
+    if(document.getElementById("f_hasSizes").checked){
+      for(let i = 0; i < formSizes.length; i++){
+        const s = formSizes[i];
+        if(!s.name) continue;
+        const clean = { name: s.name, priceAdd: s.priceAdd || 0 };
+        if(s._file){
+          btn.textContent = `عم نرفع صورة الحجم "${s.name}"...`;
+          const path = (isEditingExisting && s.img) ? s.img : `images/${categoryId}/product-${id}/size-${i + 1}.jpg`;
+          const base64 = await resizeImageFile(s._file);
+          await uploadImageToGithub(currentCfg, currentToken, path, base64, `رفع صورة حجم: ${name} - ${s.name}`);
+          clean.img = path;
+        }else if(s.img){
+          clean.img = s.img;
+        }
+        sizesToSave.push(clean);
+      }
+    }
+
+    // ٣) رفع صور النكهات (كل نكهة صورتها اختيارية)
+    const flavorsToSave = [];
+    if(document.getElementById("f_hasFlavors").checked){
+      for(let i = 0; i < formFlavors.length; i++){
+        const f = formFlavors[i];
+        if(!f.name) continue;
+        const clean = { name: f.name, priceAdd: f.priceAdd || 0 };
+        if(f._file){
+          btn.textContent = `عم نرفع صورة النكهة "${f.name}"...`;
+          const path = (isEditingExisting && f.img) ? f.img : `images/${categoryId}/product-${id}/flavor-${i + 1}.jpg`;
+          const base64 = await resizeImageFile(f._file);
+          await uploadImageToGithub(currentCfg, currentToken, path, base64, `رفع صورة نكهة: ${name} - ${f.name}`);
+          clean.img = path;
+        }else if(f.img){
+          clean.img = f.img;
+        }
+        flavorsToSave.push(clean);
+      }
+    }
+
+    const options = {};
+    if(sizesToSave.length) options.sizes = sizesToSave;
+    if(flavorsToSave.length) options.flavors = flavorsToSave;
+    if(Object.keys(options).length) product.options = options;
+
+    // ٤) حفظ بيانات المنتج نفسها — آخر خطوة، بعد ما كل الصور انرفعت بنجاح
+    btn.textContent = "عم نحفظ بيانات المنتج...";
+    let updatedProducts;
+    if(editingId){
+      updatedProducts = currentProducts.map(p => p.id === editingId ? product : p);
+    }else{
+      updatedProducts = [...currentProducts, product];
+    }
+
+    const newSha = await saveProductsToGithub(
+      currentCfg, currentToken, updatedProducts, currentSha,
+      editingId ? `تعديل منتج: ${name}` : `إضافة منتج جديد: ${name}`
+    );
+    currentProducts = updatedProducts;
+    currentSha = newSha;
+    renderProducts(currentProducts);
+    populateCategoryOptions(currentCategories);
+    closeForm();
+    showStatus(editingId ? "تم تعديل المنتج وحفظه على الموقع ✓" : "تم إضافة المنتج وحفظه على الموقع ✓", "success");
+  }catch(err){
+    showFormMsg(err.message);
+  }finally{
+    btn.disabled = false;
+    btn.textContent = "حفظ على الموقع";
+  }
+});
+
+// محاولة الدخول التلقائي لو فيه إعدادات وتوكن محفوظين بنفس الجلسة
+function initApp(){
+  const cfg = getConfig();
+  const token = localStorage.getItem(TOKEN_KEY);
+  if(cfg && token){
+    document.getElementById("cfgOwner").value = cfg.owner || "";
+    document.getElementById("cfgRepo").value = cfg.repo || "";
+    document.getElementById("cfgBranch").value = cfg.branch || "main";
+    connectAndLoad(cfg, token);
+  }else if(cfg){
+    document.getElementById("cfgOwner").value = cfg.owner || "";
+    document.getElementById("cfgRepo").value = cfg.repo || "";
+    document.getElementById("cfgBranch").value = cfg.branch || "main";
+  }
+}
+
+// ---------- حماية كلمة المرور ----------
+// غيّر السطر التالي وحط كلمة المرور يلي بدك ياها قبل ما تنشر اللوحة على الإنترنت
+const ADMIN_PASSWORD = "1234";
+const PW_OK_KEY = "jawaha_admin_pw_ok";
+
+function unlockApp(){
+  document.getElementById("passwordScreen").style.display = "none";
+  document.getElementById("container-main").style.display = "block";
+  initApp();
+}
+
+document.getElementById("pwBtn").addEventListener("click", () => {
+  const val = document.getElementById("pwInput").value;
+  if(val === ADMIN_PASSWORD){
+    sessionStorage.setItem(PW_OK_KEY, "1");
+    document.getElementById("pwMsg").style.display = "none";
+    unlockApp();
+  }else{
+    document.getElementById("pwMsg").textContent = "كلمة المرور غلط، حاول كمان مرة.";
+    document.getElementById("pwMsg").style.display = "block";
+  }
+});
+
+document.getElementById("pwInput").addEventListener("keydown", (e) => {
+  if(e.key === "Enter") document.getElementById("pwBtn").click();
+});
+
+(function initGate(){
+  if(sessionStorage.getItem(PW_OK_KEY) === "1"){
+    document.getElementById("passwordScreen").style.display = "none";
+    document.getElementById("container-main").style.display = "block";
+    initApp();
+  }else{
+    document.getElementById("passwordScreen").style.display = "block";
+    document.getElementById("container-main").style.display = "none";
+  }
+})();
+</script>
+
+</body>
+</html>
