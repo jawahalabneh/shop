@@ -210,16 +210,6 @@
           "priceAdd": -2,
           "img": "images/mahashi/felfel/sageer.png"
         }
-      ],
-      "flavors": [
-        {
-          "name": "عادي",
-          "priceAdd": 0
-        },
-        {
-          "name": "سبايسي",
-          "priceAdd": 0
-        }
       ]
     }
   },
