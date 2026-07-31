@@ -414,27 +414,5 @@
         }
       ]
     }
-  },
-  {
-    "id": 18,
-    "categoryId": "mahashi",
-    "name": "بندورة مشوية",
-    "description": "بندورة مشوية جواها لبنة",
-    "basePrice": 5,
-    "hidden": true,
-    "image": "images/mahashi/bandora/kabeer.png",
-    "options": {
-      "sizes": [
-        {
-          "name": "كبير",
-          "priceAdd": 0
-        },
-        {
-          "name": "صغير",
-          "priceAdd": -2,
-          "img": "images/mahashi/bandora/sageer.png"
-        }
-      ]
-    }
   }
 ]
