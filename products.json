@@ -340,28 +340,6 @@
     }
   },
   {
-    "id": 15,
-    "categoryId": "mooneh",
-    "name": "زعتر بلدي",
-    "description": "زعتر بلدي أصلي مطحون طازج، ممزوج بالسماق وزيت الزيتون البلدي.",
-    "basePrice": 3,
-    "image": "images/mooneh/zaatar_baladi/kabeer.png",
-    "options": {
-      "sizes": [
-        {
-          "name": "كبير",
-          "priceAdd": 0,
-          "img": "images/mooneh/zaatar_baladi/kabeer.png"
-        },
-        {
-          "name": "صغير",
-          "priceAdd": -1,
-          "img": "images/mooneh/zaatar_baladi/kabeer.png"
-        }
-      ]
-    }
-  },
-  {
     "id": 16,
     "categoryId": "karat",
     "name": "كرات اللبنة سبايسي",
