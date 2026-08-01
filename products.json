@@ -404,5 +404,27 @@
         }
       ]
     }
+  },
+  {
+    "id": 18,
+    "categoryId": "mooneh",
+    "name": "زعتر بلدي",
+    "description": "زعتر بلديi أصلي مطحون طازج، ممزوج بالسماق وزيت الزيتون البلدي.",
+    "basePrice": 3,
+    "image": "images/mooneh/product-18/main.jpg",
+    "options": {
+      "sizes": [
+        {
+          "name": "كبير",
+          "priceAdd": 0,
+          "img": "images/mooneh/product-18/size-1.jpg"
+        },
+        {
+          "name": "صغير",
+          "priceAdd": -1,
+          "img": "images/mooneh/product-18/size-2.jpg"
+        }
+      ]
+    }
   }
 ]
