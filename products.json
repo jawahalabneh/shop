@@ -169,12 +169,12 @@
     "options": {
       "sizes": [
         {
-          "name": "كبير",
+          "name": "كبير  (500جرام)",
           "priceAdd": 0,
           "img": "images/mahashi/mekhalal_khyar/kabeer.png"
         },
         {
-          "name": "صغير",
+          "name": "صغير  (250جرام)",
           "priceAdd": -2,
           "img": "images/mahashi/mekhalal_khyar/sageer.png"
         }
