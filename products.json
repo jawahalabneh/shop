@@ -313,7 +313,7 @@
     "id": 13,
     "categoryId": "mooneh",
     "name": "خل تفاح طبيعي",
-    "description": "خل تفاح طبيعي 100% مصنوع بطريقة تقليدية، بدون أي إضافات صناعية.",
+    "description": "خل تفاح طبيعي 100% مصنوع بطريقة تقليدية، بدون أي إضافات صناعية.\n-\nالحجم : 100 مل",
     "basePrice": 2,
     "image": "images/mooneh/khall_tuffah/kabeer.png"
   },
