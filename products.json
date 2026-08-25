@@ -387,18 +387,18 @@
     "id": 18,
     "categoryId": "mooneh",
     "name": "زعتر بلدي",
-    "description": "زعتر بلدي بيتي، أصلي مطحون طازج، ممزوج بالسمسم والسماق البلدي.\n-\nالحجم الصغير : 100 جرام\nالحجم الكبير : 200 جرام",
+    "description": "زعتر بلدي بيتي، أصلي مطحون طازج، ممزوج بالسمسم والسماق البلدي.\n-\nالحجم الصغير : 100 جرام\n-\nالحجم الكبير : 200 جرام",
     "basePrice": 3,
     "image": "images/mooneh/product-18/main.jpg",
     "options": {
       "sizes": [
         {
-          "name": "كبير",
+          "name": "كبير  (200جرام)",
           "priceAdd": 0,
           "img": "images/mooneh/product-18/size-1.jpg"
         },
         {
-          "name": "صغير",
+          "name": "صغير  (100جرام)",
           "priceAdd": -1,
           "img": "images/mooneh/product-18/size-2.jpg"
         }
