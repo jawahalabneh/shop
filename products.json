@@ -327,12 +327,12 @@
     "options": {
       "sizes": [
         {
-          "name": "كبير",
+          "name": "كبير  (500جرام)",
           "priceAdd": 0,
           "img": "images/mooneh/shattah/kabeer.png"
         },
         {
-          "name": "صغير",
+          "name": "صغير  (250جرام)",
           "priceAdd": -1,
           "img": "images/mooneh/shattah/sageer.png"
         }
