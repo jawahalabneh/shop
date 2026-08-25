@@ -201,12 +201,12 @@
     "options": {
       "sizes": [
         {
-          "name": "كبير",
+          "name": "كبير  (500جرام)",
           "priceAdd": 0,
           "img": "images/mahashi/felfel/kabeer.png"
         },
         {
-          "name": "صغير",
+          "name": "صغير  (250جرام)",
           "priceAdd": -2,
           "img": "images/mahashi/felfel/sageer.png"
         }
