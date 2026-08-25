@@ -255,12 +255,12 @@
     "options": {
       "sizes": [
         {
-          "name": "كبير",
+          "name": "كبير  (500جرام)",
           "priceAdd": 0,
           "img": "images/karat/bilzaatar/kabeer.png"
         },
         {
-          "name": "صغير",
+          "name": "صغير  (250جرام)",
           "priceAdd": -2,
           "img": "images/karat/bilzaatar/sageer.png"
         }
