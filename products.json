@@ -404,5 +404,27 @@
         }
       ]
     }
+  },
+  {
+    "id": 19,
+    "categoryId": "karat",
+    "name": "لبنة غنم بلدية",
+    "description": "لبنة خاصة من صنع مشغل جوّاها لبنة ،وهي لبنة غنم بلدية أصيلة مصنوعة بأيدينا بعناية .",
+    "basePrice": 4,
+    "image": "images/karat/product-19/main.jpg",
+    "options": {
+      "sizes": [
+        {
+          "name": "كبير",
+          "priceAdd": 0,
+          "img": "images/karat/product-19/size-1.jpg"
+        },
+        {
+          "name": "صغير",
+          "priceAdd": 1.5,
+          "img": "images/karat/product-19/size-2.jpg"
+        }
+      ]
+    }
   }
 ]
