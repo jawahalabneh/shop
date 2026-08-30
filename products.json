@@ -421,7 +421,7 @@
         },
         {
           "name": "صغير",
-          "priceAdd": 1.5,
+          "priceAdd": -1.5,
           "img": "images/karat/product-19/size-2.jpg"
         }
       ]
