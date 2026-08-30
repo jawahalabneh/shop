@@ -366,7 +366,7 @@
     "categoryId": "karat",
     "name": "اللبنة الوردية",
     "description": "لبنة بلدية ممزوجة بالشمندر والملفوف الأحمر، منكهة بالسماق البلدي والأوريجانو، طعم منعش ولون وردي طبيعي.",
-    "basePrice": 6,
+    "basePrice": 5,
     "image": "images/karat/labneh_zahriya/kabeer.png",
     "options": {
       "sizes": [
