@@ -415,12 +415,12 @@
     "options": {
       "sizes": [
         {
-          "name": "كبير",
+          "name": "كبير (500جرام)",
           "priceAdd": 0,
           "img": "images/karat/product-19/size-1.jpg"
         },
         {
-          "name": "صغير",
+          "name": "صغير (250جرام)",
           "priceAdd": -1.5,
           "img": "images/karat/product-19/size-2.jpg"
         }
