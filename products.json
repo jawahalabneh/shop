@@ -369,7 +369,6 @@
     "description": "لبنة بلدية ممزوجة بالشمندر والملفوف الأحمر، منكهة بالسماق البلدي والأوريجانو، طعم منعش ولون وردي طبيعي.",
     "basePrice": 6,
     "comingSoon": true,
-    "hidden": true,
     "image": "images/karat/labneh_zahriya/kabeer.png",
     "options": {
       "sizes": [
