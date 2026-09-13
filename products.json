@@ -504,5 +504,27 @@
     "description": "مزيح من كرات اللبنة المغطاة بالزعتر، والشطة، والجوز، والنعنع، والسماق، والسمسم مع القزحة، والسادة ، وكل نوع على كرة منفصلة.",
     "basePrice": 5.5,
     "image": "images/karat/product-23/main.jpg"
+  },
+  {
+    "id": 24,
+    "categoryId": "mooneh",
+    "name": "مقدوس إكسترا",
+    "description": "مقدوس إكسترا حشوة بالشطة والجوز والثوم وزيت الزيتون",
+    "basePrice": 5,
+    "image": "images/mooneh/product-24/main.jpg",
+    "options": {
+      "sizes": [
+        {
+          "name": "كبير (500جرام)",
+          "priceAdd": 0,
+          "img": "images/mooneh/product-24/size-1.jpg"
+        },
+        {
+          "name": "صغير (250جرام)",
+          "priceAdd": -2,
+          "img": "images/mooneh/product-24/size-2.jpg"
+        }
+      ]
+    }
   }
 ]
