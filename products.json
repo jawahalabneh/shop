@@ -526,5 +526,27 @@
         }
       ]
     }
+  },
+  {
+    "id": 25,
+    "categoryId": "mooneh",
+    "name": "دبس فليفلة",
+    "description": "دبس الفليفة الحمراء الحلوة البدلية",
+    "basePrice": 5,
+    "image": "images/mooneh/product-25/main.jpg",
+    "options": {
+      "sizes": [
+        {
+          "name": "كبير (500جرام)",
+          "priceAdd": 0,
+          "img": "images/mooneh/product-25/size-1.jpg"
+        },
+        {
+          "name": "صغير (250جرام)",
+          "priceAdd": -2,
+          "img": "images/mooneh/product-25/size-2.jpg"
+        }
+      ]
+    }
   }
 ]
