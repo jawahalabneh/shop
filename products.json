@@ -474,5 +474,27 @@
         }
       ]
     }
+  },
+  {
+    "id": 22,
+    "categoryId": "mahashi",
+    "name": "كرات اللبنة بالسمسم والقزحة",
+    "description": "مزيج كرات اللبنة بالسمسم البلدي والقزحة المقرمشة مغطاة بزيت الزيتون",
+    "basePrice": 5,
+    "image": "images/mahashi/product-22/main.jpg",
+    "options": {
+      "sizes": [
+        {
+          "name": "كبير (500جرام)",
+          "priceAdd": 0,
+          "img": "images/mahashi/product-22/size-1.jpg"
+        },
+        {
+          "name": "صغير (250جرام)",
+          "priceAdd": -2,
+          "img": "images/mahashi/product-22/size-2.jpg"
+        }
+      ]
+    }
   }
 ]
