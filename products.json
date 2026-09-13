@@ -509,6 +509,7 @@
     "name": "مقدوس إكسترا",
     "description": "مقدوس إكسترا حشوة بالشطة والجوز والثوم وزيت الزيتون",
     "basePrice": 5,
+    "comingSoon": true,
     "image": "images/mooneh/product-24/main.jpg",
     "options": {
       "sizes": [
