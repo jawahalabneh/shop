@@ -431,5 +431,26 @@
         }
       ]
     }
+  },
+  {
+    "id": 20,
+    "categoryId": "mahashi",
+    "name": "كرات اللبنة بالسماق",
+    "description": "كرات اللبنة بالسماق البلدي مغطاة بزيت الزيتون",
+    "basePrice": 5,
+    "image": "images/mahashi/product-20/main.jpg",
+    "options": {
+      "sizes": [
+        {
+          "name": "كبير (500جرام)",
+          "priceAdd": 0,
+          "img": "images/mahashi/product-20/size-1.jpg"
+        },
+        {
+          "name": "صغير (250جرام)",
+          "priceAdd": -2
+        }
+      ]
+    }
   }
 ]
