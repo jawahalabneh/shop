@@ -545,5 +545,37 @@
         }
       ]
     }
+  },
+  {
+    "id": 26,
+    "categoryId": "mahashi",
+    "name": "فلفل شيري باللبنة",
+    "description": "فلفل احمر حلو صغير ( شيري ) ،محشو باللبنة الطازجة مع اضافة زبت الزيتون الصافي",
+    "basePrice": 5,
+    "image": "images/mahashi/product-26/main.jpg",
+    "options": {
+      "sizes": [
+        {
+          "name": "كبير ( 500جرام )",
+          "priceAdd": 0,
+          "img": "images/mahashi/product-26/size-1.jpg"
+        },
+        {
+          "name": "صغير ( 250جرام )",
+          "priceAdd": -2,
+          "img": "images/mahashi/product-26/size-2.jpg"
+        }
+      ],
+      "flavors": [
+        {
+          "name": "عادي",
+          "priceAdd": 0
+        },
+        {
+          "name": "سبايسي",
+          "priceAdd": 0
+        }
+      ]
+    }
   }
 ]
