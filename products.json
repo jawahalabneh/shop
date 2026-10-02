@@ -530,6 +530,7 @@
     "name": "دبس فليفلة",
     "description": "دبس الفليفة الحمراء الحلوة البدلية",
     "basePrice": 5,
+    "comingSoon": true,
     "image": "images/mooneh/product-25/main.jpg",
     "options": {
       "sizes": [
