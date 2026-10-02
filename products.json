@@ -367,7 +367,7 @@
     "name": "اللبنة الزهرية",
     "description": "لبنة بلدية ممزوجة بالشمندر والملفوف الأحمر، منكهة بالسماق البلدي والأوريجانو، طعم منعش ولون وردي طبيعي.",
     "basePrice": 6,
-    "hidden": true,
+    "comingSoon": true,
     "image": "images/karat/labneh_zahriya/kabeer.png",
     "options": {
       "sizes": [
